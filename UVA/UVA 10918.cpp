@@ -1,3 +1,10 @@
+/*
+define the dp state as dp[i][d1][d2] to be the number of ways to put the pieces
+where i is the last nonempty place on the first row
+and d1 is the difference between i and and the last nonempty place on the second row 
+and d2 is the difference between i and and the last nonempty place on the third row 
+the answer will be dp[n][0][0]
+*/
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;

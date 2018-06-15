@@ -1,5 +1,6 @@
 /*
 standard dp solution implemented using matrix exponentiation 
+https://codeforces.com/blog/entry/23196
 */
 
 #include<bits/stdc++.h>

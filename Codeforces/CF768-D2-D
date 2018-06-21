@@ -1,0 +1,56 @@
+/*
+define the dp state as :
+dp[cnt][day]
+the probability of having orbs of cnt types after the (day) day 
+*/
+
+#include<bits/stdc++.h>
+using namespace std;
+
+typedef long long ll;
+
+struct QUERY
+{
+    int idx;
+    int val;
+    bool operator < (const QUERY &other)const
+    {
+        return val > other.val;
+    }
+};
+int ans [1009];
+
+double dp[1009][2];
+int main()
+{
+    int n, q;
+    scanf("%d %d", &n, &q);
+    priority_queue<QUERY>pq;
+    for(int i=0;i<q;i++)
+    {
+        int x;
+        scanf("%d", &x);
+        pq.push(QUERY{i, x});
+    }
+    dp[0][0] = 2000;
+    for(int day = 1;!pq.empty(); day++)
+    {
+        int cur_day = day &1;
+        int prv_day = cur_day^1;
+        for(int cnt = 1; cnt<= n;cnt++)
+        {
+            dp[cnt][cur_day] = dp[cnt-1][prv_day]*(1.0*n - (cnt-1))/n
+            + dp[cnt][prv_day]*(1.0*cnt/n);
+        }
+        dp[0][cur_day] = dp[0][prv_day] = 0;
+        while(!pq.empty() && pq.top().val <= dp[n][cur_day] + 1e-7)
+        {
+            ans[pq.top().idx] = day;
+            pq.pop();
+        }
+    }
+    for(int i=0;i<q;i++)
+    {
+        printf("%d\n", ans[i]);
+    }
+}
